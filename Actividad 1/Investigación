@@ -1,1 +1,32 @@
+# Actividad 1
 
+## ¿Qué es un computador digital moderno?
+Un computador digital moderno es un dispositivo electrónico que procesa información en forma de datos digitales (ceros y unos), utilizando componentes como el procesador (CPU), la memoria, el almacenamiento y dispositivos de entrada y salida. Funciona siguiendo instrucciones precisas (software) para realizar tareas como cálculos, procesamiento de texto, navegación en internet, diseño gráfico, entre muchas otras. Los computadores modernos se caracterizan por su velocidad, capacidad de almacenamiento, conectividad y la posibilidad de ejecutar múltiples programas al mismo tiempo.
+
+### ¿Cuáles son sus partes?
+Un computador digital moderno está compuesto por:
+
+- **CPU**: Procesa la información (cerebro del computador).
+- **Memoria RAM**: Guarda datos temporalmente mientras se usan.
+- **Almacenamiento (HDD/SSD)**: Guarda datos y programas de forma permanente.
+- **Placa base**: Conecta todos los componentes.
+- **Fuente de poder**: Distribuye energía al sistema.
+- **GPU**: Procesa gráficos e imágenes.
+- **Dispositivos de entrada**: Permiten dar información al computador (teclado, mouse).
+- **Dispositivos de salida**: Muestran los resultados (pantalla, impresora).
+- **Dispositivos de comunicación**: Permiten conectarse a redes (Wi-Fi, Bluetooth).
+
+---
+
+# Actividad 2
+
+## ¿Qué es entonces un programa?
+Un programa es un conjunto de instrucciones que un computador sigue para realizar una tarea específica, como escribir un texto, navegar en internet o reproducir música. Es lo que le dice al computador qué hacer y cómo hacerlo.
+
+## ¿Qué es un lenguaje ensamblador?
+Un lenguaje ensamblador es un tipo de lenguaje de programación de bajo nivel que utiliza instrucciones simples y comprensibles para humanos, pero que están muy cerca del código máquina que entiende el computador. Cada instrucción en ensamblador generalmente corresponde a una acción específica del procesador, como sumar, mover datos o saltar a otra parte del programa.  
+Se usa principalmente para programar directamente el hardware, y aunque es más difícil de leer que otros lenguajes modernos, permite un mayor control y eficiencia del sistema.
+
+## ¿Qué es lenguaje de máquina?
+Un lenguaje de máquina es el lenguaje más básico que entiende directamente un computador. Está compuesto únicamente por códigos binarios (0 y 1) que representan instrucciones para el procesador.  
+Cada tipo de procesador tiene su propio lenguaje de máquina. Aunque es muy rápido y eficiente, es difícil de leer y escribir para los humanos, por eso se usan lenguajes como el ensamblador o lenguajes de alto nivel para facilitar la programación.
