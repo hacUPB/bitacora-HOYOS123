@@ -115,3 +115,108 @@ D=D+A
 M=D
 
 //punto 13
+@0
+D=M
+@SET_POS
+D;JGE
+@1
+M=-1
+@LOOP
+0;JMP
+(SET_POS)
+@1
+M=1
+(LOOP)
+@LOOP
+0;JMP
+
+//punto 14
+@1
+D=M
+@R13
+M=D
+@R13
+A=M
+D=M
+@4
+M=D
+
+//punto 15
+@R0
+D=M
+@START
+M=D
+@R1
+D=M
+@END
+M=D
+@COUNT
+M=0
+(LOOP)
+@COUNT
+D=M
+@END
+D=D-M
+@STOP
+D;JEQ
+@START
+A=M
+M=-1
+@START
+D=M
+@1
+D=D+1
+@START
+M=D
+@COUNT
+D=M
+@1
+D=D+1
+@COUNT
+M=D
+@LOOP
+0;JMP
+(STOP)
+@STOP
+0;JMP
+
+//punto 16
+@0
+M=0
+@0
+D=A
+@R1
+M=D
+(LOOP)
+@R1
+D=M
+@10
+D=D-A
+@END
+D;JGE
+@R1
+D=M
+@200
+A=D+A
+D=M
+@0
+M=D+M
+@R1
+M=M+1
+@LOOP
+0;JMP
+(END)
+@END
+0;JMP
+
+//punto 17
+@7
+D=D-A
+@69
+D;JEQ
+
+//punto 18
+
+//punto 19
+Que hace este Programa?
+mientras mantienes presionada una tecla, se va llenando la memoria de la pantalla con -1 (píxeles encendidos) desde el inicio hacia el final; al soltarla, recorre en sentido inverso apagando esos pixeles, creando un efecto de “llenado/vaciado” de la pantalla controlado por el teclado.
