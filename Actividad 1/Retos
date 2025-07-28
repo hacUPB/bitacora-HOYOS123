@@ -72,7 +72,7 @@ M=D+D
 // i=1000
 @1000
 D=A
-@M=D
+M=D
 (LOOP)
 // if (i==0) goto CONT
 @i
