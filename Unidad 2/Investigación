@@ -38,7 +38,6 @@ Es una técnica donde los dispositivos de entrada y salida (como pantalla o tecl
   0;JMP
 
 (DRAW_IMAGE)
-  // Pega aquí el código de dibujo del bitmap (tu código)
   @START
   0;JMP
 
@@ -82,7 +81,6 @@ Es una técnica donde los dispositivos de entrada y salida (como pantalla o tecl
   0;JMP
 
 (DRAW_IMAGE)
-  // Pega aquí el código de dibujo del bitmap (tu código)
   @START
   0;JMP
 
