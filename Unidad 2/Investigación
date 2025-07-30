@@ -1,0 +1,109 @@
+# Actividad 1 y 2
+
+## ¿Qué es la entrada-salida mapeada a memoria?
+
+Es una técnica donde los dispositivos de entrada y salida (como pantalla o teclado) se controlan **leyendo o escribiendo en direcciones de memoria específicas**. No se requieren instrucciones especiales: todo se trata como acceso a memoria.
+
+---
+
+## ¿Cómo se usa en la plataforma Hack?
+
+- **Pantalla (`SCREEN`):**  
+  - Dirección inicial: `16384` (decimal) o `0x4000` (hex).  
+  - Cada celda representa 16 píxeles.  
+  - Escribir en esta región modifica el contenido visible de la pantalla.
+
+- **Teclado (`KBD`):**  
+  - Dirección: `24576` (decimal) o `0x6000` (hex).  
+  - Leer esta dirección devuelve el código ASCII de la tecla presionada, o `0` si no hay ninguna.
+
+---
+
+# Imagen en el Bitmap Editor
+
+![Imagen](image-1.png)
+
+# Actividad 3
+
+(START)
+  @KBD
+  D=M
+  @DRAW_IMAGE
+  D;JEQ
+  @100
+  D=D-A
+  @DRAW_IMAGE
+  D;JEQ
+  @ERASE_IMAGE
+  0;JMP
+
+(DRAW_IMAGE)
+  // Pega aquí el código de dibujo del bitmap (tu código)
+  @START
+  0;JMP
+
+(ERASE_IMAGE)
+  @16384
+  D=A
+  @R0
+  M=D
+  @64
+  D=A
+  @R1
+  M=D
+(ERASE_LOOP)
+  @R0
+  A=M
+  M=0
+  @R0
+  M=M+1
+  @R1
+  M=M-1
+  @ERASE_LOOP
+  D;JGT
+  @START
+  0;JMP
+
+# Actividad 4
+(START)
+  @KBD
+  D=M
+  @100
+  D=D-A
+  @DRAW_IMAGE
+  D;JEQ
+  @KBD
+  D=M
+  @101
+  D=D-A
+  @ERASE_IMAGE
+  D;JEQ
+  @START
+  0;JMP
+
+(DRAW_IMAGE)
+  // Pega aquí el código de dibujo del bitmap (tu código)
+  @START
+  0;JMP
+
+(ERASE_IMAGE)
+  @16384
+  D=A
+  @R0
+  M=D
+  @64
+  D=A
+  @R1
+  M=D
+(ERASE_LOOP)
+  @R0
+  A=M
+  M=0
+  @R0
+  M=M+1
+  @R1
+  M=M-1
+  @ERASE_LOOP
+  D;JGT
+  @START
+  0;JMP
