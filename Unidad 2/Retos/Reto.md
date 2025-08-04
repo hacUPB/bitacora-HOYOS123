@@ -172,3 +172,5 @@ M=D
 - **¿Qué hace esto pvar = &var3;?**
 **R//** Guarda en pvar la dirección de var3, o sea, ahora pvar apunta a esa variable.
 
+## Mini reto 9: Posible traducción a lenguaje ensamblador
+
