@@ -52,7 +52,7 @@ M=M+1
 - **Después de todo lo que has hecho, ¿qué es entonces una variable?**  
 **R//** Es un espacio de memoria donde puedo guardar un valor y cambiarlo cuando quiera.
 
-## Mini retos 1 y 2: Escribir un programa en lenguaje ensamblador para que utilice un ciclo for en vez de un ciclo while.
+## Mini retos 2 y 3: Escribir un programa en lenguaje ensamblador para que utilice un ciclo for en vez de un ciclo while.
 
 **R//**
 ```
