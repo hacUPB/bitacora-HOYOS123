@@ -55,7 +55,14 @@ M=M+1
 
 ## Mini retos 2 y 3: Escribir un programa en lenguaje ensamblador para que utilice un ciclo for en vez de un ciclo while.
 
-**R//**
+2.**R//**
+```
+for (int i = 1; i <= 100; i++) {
+   sum += i;
+}
+```
+
+3.**R//**
 ```
 @0
 D=A
