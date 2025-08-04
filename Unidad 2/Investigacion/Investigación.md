@@ -24,7 +24,7 @@ Es una técnica donde los dispositivos de entrada y salida (como pantalla o tecl
 ![Imagen](image-1.png)
 
 # Actividad 3
-
+```
 (START)
   @KBD
   D=M
@@ -62,8 +62,9 @@ Es una técnica donde los dispositivos de entrada y salida (como pantalla o tecl
   D;JGT
   @START
   0;JMP
-
+```
 # Actividad 4
+```
 // Espera una tecla y actúa según la letra
 (READ)
 @KBD
@@ -326,7 +327,7 @@ M=D
 D=A
 @R47
 M=D
-
+```
 ## Explicación del error en el código de dibujo (Nand2Tetris)
 
 **Profe, es que aquí hay un problema con el ciclo que dibuja la imagen.**  
