@@ -1,0 +1,58 @@
+####Lenguaje de alto nivel
+
+## **Investigación**
+
+### Actividad 1
+
+# **¿Cuál es el resultado que se obtiene al ejecutar este programa? (Punto 4)**
+**R//** Al compilar el fondo se hizo de color negro y el cursor del Mouse se convirtió en un círculo blanco de radio 20 que se mueve en el eje X y Y.
+
+### Actividad 2
+
+# **¿Qué fue lo que incluimos en el archivo .h?**
+**R//** Incluimos que el Mouse se mueva y genere una serie de partículas que pueden cambiar de color.
+
+# **¿Cómo funciona la aplicación?**
+**R//** Estas partículas aparecen dejando un rastro del camino que trazó el cursor.
+
+# **¿Qué hace la función mouseMoved?**
+**R//** Esta función hace que el cursor (Círculo) se mueva en el eje X y el eje Y.
+
+# **¿Qué hace la función mousePressed?**
+**R//** Cuando los botones de el Mouse son presionados, el círculo cambia a cualquier color (Random).
+
+# **¿Qué hace la función setup?**
+**R//** Declara el color del fondo y el color con el que inicia la partícula.
+
+# **¿Qué hace la función update?**
+**R//** Los valores almacenados los va actualizando dependiendo de las variables
+
+# **¿Qué hace la función draw?**
+**R//** Dibuja el círculo y sus partículas (El rastro de este).
+
+### Actividad 3
+
+**R//** Este proyecto en OpenFrameworks crea una app donde, al mover el mouse, se van dibujando círculos en las posiciones por donde pasa. Estos círculos se guardan en una lista, pero solo se muestran los últimos 100 para que no se acumulen demasiados.
+
+Al hacer clic con el mouse, todos los círculos cambian de color a uno aleatorio. Al inicio, el fondo es negro y los círculos son blancos, pero con cada clic cambian de color.
+
+### Actividad 4
+
+**Ver videos**
+
+### Actividad 5
+
+# **¿Cuál es la definición de un puntero?**
+**R//** Un puntero es como una flecha que apunta a donde está guardado un objeto en la memoria.
+
+# **¿Dónde está el puntero?**
+**R//** El puntero apunta a la esfera seleccionada y selecciona una con el mouse y la mueve.
+
+# **¿Cómo se inicializa el puntero?**
+**R//** Un puntero se inicializa asignándole una dirección de memoria o un valor especial.
+
+# **¿Para qué se está usando el puntero?**
+**R//** Para poder seleccionar y mover una esfera con el mouse, sin necesidad de copiar o duplicar el objeto.
+
+# **¿Qué es exactamente lo que está almacenado en el puntero?**
+**R//** Lo que está almacenado en el puntero es una dirección de memoria. Es decir, el puntero no guarda el objeto como tal, sino la ubicación en la memoria donde vive ese objeto.
