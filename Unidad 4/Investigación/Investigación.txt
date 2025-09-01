@@ -1,1 +1,101 @@
-pornito sabroso
+# Serpiente en C++ con openFrameworks
+
+## Pregunta
+
+### Sobre la estructura de datos
+
+A)  **¿Qué representa un `Node` en el programa?**\
+    **R//** Un segmento de la serpiente, con su posición `(x, y)` y un puntero
+    al siguiente segmento.
+------------------------------------------------------------------------
+### Sobre el ciclo de la aplicación
+
+B)  **¿Qué función se repite en cada frame para actualizar la lógica del
+    juego?**\
+    **R//** `update()`.
+
+------------------------------------------------------------------------
+### Sobre el movimiento
+
+C)  **¿De dónde obtiene su nueva posición cada nodo que *no* es la
+    cabeza?**\
+    **R//** De la posición previa de su nodo anterior.
+
+D)  **¿Qué pasa con el espaciado entre los nodos si mueves el mouse muy
+    rápido?**\
+    **R//** Los nodos se separan más, porque cada uno copia la posición
+    antigua del anterior (queda más distancia).
+
+------------------------------------------------------------------------
+### Sobre la interacción
+
+E) **¿Qué sucede al presionar la tecla `c`?**\
+    **R//** Se borra la lista completa: desaparece la serpiente.
+
+------------------------------------------------------------------------
+## Pregunta 
+
+A) **¿Qué es una lista enlazada y en qué se diferencia de un arreglo en cuanto a la forma en que los elementos están almacenados en la memoria?**
+
+**R//** Yo entendí que una lista enlazada es una estructura donde cada elemento (nodo) guarda sus datos y una referencia al siguiente. A diferencia de un arreglo, los nodos no están en posiciones contiguas de memoria; pueden estar dispersos, y lo único que los une son los punteros.
+
+B) **¿Cómo se vinculan los nodos entre sí?**
+
+**R//** Vi que se hace con punteros. Cada nodo tiene un Node* next que apunta al nodo siguiente. Así se arma la cadena.
+
+C) **¿Cómo se gestiona la memoria en una lista enlazada?**
+
+**R//** Yo aprendí que cuando hago new Node(...), el nodo se crea en el heap. Luego, cuando ya no lo necesito, debo usar delete para liberar ese espacio. Por eso en clear() se recorre la lista y se hace delete nodo por nodo.
+
+D) **¿Qué ventajas tiene frente a un arreglo al insertar o eliminar elementos intermedios?**
+
+**R//** Me quedó claro que en un arreglo hay que mover muchos elementos para abrir espacio o para cerrar huecos. En la lista enlazada solo cambio punteros: quito o pongo un nodo sin mover el resto.
+
+E) **¿Cómo se asegura que no haya fugas de memoria en el código?**
+
+**R//** Entendí que gracias al destructor ~LinkedList() que llama a clear(). Así cada nodo que se creó con new se destruye con delete. Eso evita que queden bloques de memoria ocupados sin usarse.
+
+F) **¿Qué pasa en la memoria cuando invoco clear()?**
+
+**R//** Yo lo veo así:
+
+- Empiezo en head.
+- Guardo un puntero al siguiente nodo.
+- Borro el actual con delete.
+- Paso al siguiente.
+- Repito hasta llegar al final.
+- Al terminar, head y tail quedan en nullptr y la memoria de todos los nodos fue liberada.
+
+G) **¿Qué pasa en memoria al agregar un nuevo nodo al final?**
+
+**R//** Cuando hago addNode, se crea un nuevo Node con new. Luego tail->next apunta a él, y tail ahora es ese nodo. Esto es muy rápido (O(1)) porque siempre sé dónde está el último.
+
+H) **¿Cuándo usaría una lista enlazada en vez de un arreglo?**
+
+**R//** Yo lo usaría cuando voy a insertar o eliminar elementos en medio de la colección muchas veces. Ahí la lista es más eficiente, porque en un arreglo habría que mover todo.
+
+I) **¿Cómo aplicaría este conocimiento en otra estructura personalizada?**
+
+**R//** Si quiero diseñar mi propia estructura, tendría en cuenta:
+
+- Siempre borrar lo que creo con new.
+- Tener un clear() y un destructor que limpien todo.
+- Pensar si necesito acceso rápido por índice (me conviene arreglo) o flexibilidad en insertar/eliminar (me conviene lista).
+
+J) **Diferencias entre C++ y C# en memoria**
+
+**R//** En C# hay recolector de basura, entonces no me preocupo por delete. En C++ tengo más control, pero también más responsabilidad. La ventaja es optimización fina, el reto es no olvidar liberar memoria.
+
+K) **Arte generativo con listas enlazadas**
+
+**R//** Yo tendría cuidado de no crear nodos infinitamente sin borrarlos. Me aseguraría de llamar clear() cuando ya no los necesito, y tal vez reciclar nodos en vez de destruirlos, para no estar pidiendo memoria al sistema todo el tiempo.
+
+L) **Pruebas**
+
+**R//** Si quisiera probar el programa:
+
+- Probaría crear la lista y verificar que size crece al agregar nodos.
+- Llamaría a clear() y revisaría que size sea 0.
+- Haría update() con el mouse quieto y vería que los nodos se alinean.
+- Movería el mouse rápido y comprobaría que los nodos se separan.
+- Probaría presionar c y luego r para ver si la serpiente desaparece y se reinicia bien.
