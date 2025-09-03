@@ -1,6 +1,7 @@
 # Serpiente en C++ con openFrameworks
 
-## Pregunta
+# ACTIVIDAD 1
+## Preguntas
 
 ### Sobre la estructura de datos
 
@@ -99,3 +100,91 @@ L) **Pruebas**
 - Haría update() con el mouse quieto y vería que los nodos se alinean.
 - Movería el mouse rápido y comprobaría que los nodos se separan.
 - Probaría presionar c y luego r para ver si la serpiente desaparece y se reinicia bien.
+
+---------------------------------------------
+
+# ACTIVIDAD 2
+
+## Preguntas sobre el programa en C++ y openFrameworks
+
+A) **¿Cuál es la diferencia entre cómo funciona la pila (`Stack`) y la cola (`Queue`) en este programa?**  
+   **R//** La pila funciona con la lógica *LIFO* (el último en entrar es el primero en salir), mientras que la cola usa *FIFO* (el primero en entrar es el primero en salir).  
+
+B) **¿Qué papel cumple el puntero `next` dentro de la clase `Node`?**  
+   **R//** Sirve para enlazar un nodo con el siguiente, formando la lista enlazada que sostiene tanto la pila como la cola.  
+
+C) **¿Por qué en `push` (pila) el nuevo nodo se conecta con el que antes era `top`?**  
+   **R//** Porque en una pila los nuevos elementos siempre se agregan arriba, entonces el nodo nuevo debe apuntar al que antes estaba en la cima.  
+
+D) **¿Qué pasaría si no se usara `delete` en `pop()` o `dequeue()`?**  
+   **R//** Se generaría una fuga de memoria, porque los nodos eliminados seguirían ocupando espacio aunque ya no los use el programa.  
+
+E) **¿Qué función cumple `display()` en la visualización de los nodos en pantalla?**  
+  **R//** Recorre todos los nodos y dibuja un círculo en la posición que tiene guardada cada uno.  
+
+F) **¿Qué sucede en pantalla al presionar `'a'` y qué sucede al presionar `'d'` en cada una de las estructuras?**  
+   **R//** Con `'a'` se crea un círculo en la posición del mouse y se agrega a la estructura (pila o cola). Con `'d'`, en la pila se elimina el último círculo agregado, y en la cola se elimina el primero que había entrado.
+
+# Pruebas y Reflexión sobre el Stack en C++
+
+## 1. ¿Cómo probar las partes del programa y el programa completo?
+
+### a) Pruebas unitarias de las funciones
+- **push()**  
+  Acción: Apilar un nodo con coordenadas conocidas (ej. `push(100,200)`).  
+  Resultado esperado: `top->position == (100,200)`.
+
+- **pop()**  
+  Acción: Apilar 3 nodos y luego desapilar 1.  
+  Resultado esperado: El nuevo `top` corresponde al penúltimo nodo apilado.
+
+- **clear()**  
+  Acción: Apilar varios nodos y luego llamar a `clear()`.  
+  Resultado esperado: `top == nullptr` y no hay fugas de memoria.
+
+- **display()**  
+  Acción: Apilar nodos en diferentes posiciones y dibujar.  
+  Resultado esperado: Se ven los círculos en la pantalla en las posiciones correctas.
+
+### b) Prueba integrada del programa completo
+1. Ejecutar la aplicación.
+2. Presionar `'a'` varias veces en diferentes posiciones del mouse.  
+   - **Esperado**: aparecen círculos en esas posiciones.  
+3. Presionar `'d'` varias veces.  
+   - **Esperado**: los círculos desaparecen en orden inverso a cómo se agregaron.  
+4. Cerrar el programa.  
+   - **Esperado**: no hay errores de memoria reportados (se verifica con herramientas como *Valgrind* o el debugger).
+
+---
+
+## 2. Preguntas de reflexión para el stack
+
+1. **¿Cómo se gestiona la memoria en una implementación manual de un stack en C++?**  
+   **R//** Se gestiona con `new` al crear nodos y `delete` al desapilarlos. Esto da control total, pero aumenta el riesgo de fugas o *dangling pointers* si no se libera memoria correctamente.
+
+2. **¿Por qué es importante liberar la memoria cuando se desapila un nodo en un stack?**  
+   **R//** Porque si no se libera, los nodos eliminados siguen ocupando memoria (fugas). En programas de larga duración esto puede saturar la RAM.
+
+3. **¿Qué diferencias existen entre usar un stack de la STL (`std::stack`) y crear un stack manualmente?**  
+   **R//** `std::stack` abstrae la gestión de memoria y es más seguro, pero no da control sobre cómo se almacenan los datos. Una implementación manual permite optimizar o personalizar, a costa de mayor riesgo de errores.
+
+4. **¿Cómo afecta la estructura de un stack al orden de acceso y eliminación de elementos?**  
+   **R//** El acceso es *LIFO*: siempre se elimina el último que entró. Esto es ideal para problemas como deshacer acciones (undo), recorridos en profundidad (DFS), o evaluación de expresiones.
+
+5. **¿Cómo podrías modificar el stack para almacenar tipos de datos más complejos?**  
+   **R//** Podría usar punteros a objetos o plantillas (`template<class T>`). Para evitar fugas, sería recomendable usar *smart pointers* (`std::unique_ptr` o `std::shared_ptr`).
+
+---
+
+## 3. Preguntas de autoevaluación
+
+1. ¿Puedo explicar detalladamente cómo funciona el proceso de apilar y desapilar nodos en un stack, incluyendo la gestión de memoria?
+**R//**   
+2. ¿Soy capaz de identificar y corregir una fuga de memoria en una implementación de stack manual?
+**R//** 
+3. ¿Puedo modificar el stack para que incluya una función que busque un elemento específico, sin alterar el orden de los elementos apilados?
+**R//**   
+4. ¿Entiendo cómo la estructura LIFO del stack afecta el flujo de datos y puedo dar ejemplos de problemas que se resuelvan mejor con un stack?
+**R//**   
+5. ¿Puedo implementar y depurar un stack para tipos de datos más complejos, asegurándome de que no haya fugas de memoria ni errores de puntero?
+**R//** 
