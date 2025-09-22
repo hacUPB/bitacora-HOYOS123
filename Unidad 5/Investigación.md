@@ -1,7 +1,7 @@
 # Unidad 5
 ---
 
-### Sesión 1:
+## Sesión 1:
 
 ### ¿Qué representa la clase `Particle`?
 La clase `Particle` es un **molde** para crear partículas.  
@@ -57,7 +57,7 @@ La clase `Particle` es un **molde** para crear partículas.
 Entender dónde vive cada parte ayuda a evitar fugas de memoria y a optimizar el rendimiento.
 
 ---
-### Sesión 2:
+## Sesión 2:
 
 
 **Objetivo**: comprender cómo se organizan los objetos en memoria.
@@ -105,7 +105,7 @@ Si son virtuales, se usa una tabla (vtable) que decide qué versión del método
 Por ejemplo, me hace más consciente de qué atributos agregar, cuándo usar herencia o métodos virtuales, y cómo eso puede afectar memoria y rendimiento.
 ---
 
-### Sesión 3: Implementación Interna de Encapsulamiento, Herencia y Polimorfismo
+## Sesión 3: Implementación Interna de Encapsulamiento, Herencia y Polimorfismo
 
 **Objetivo:** entender cómo se implementan las abstracciones del encapsulamiento, la herencia y el polimorfismo a nivel interno.
 
@@ -159,3 +159,4 @@ El polimorfismo se implementa con las vtables, que permiten decidir en tiempo de
 **Análisis: ventajas y desventajas en términos de eficiencia y complejidad**
 - Ventajas: más organización, reutilización de código, flexibilidad para manejar jerarquías de clases y escribir programas más modulares.
 - Desventajas: aumenta la complejidad interna, puede haber sobrecarga de memoria por las vtables y un pequeño costo de rendimiento en las llamadas virtuales.
+
