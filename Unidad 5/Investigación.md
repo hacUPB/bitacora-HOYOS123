@@ -1,7 +1,6 @@
 # Unidad 5
 
 ## Sesión 1:
----
 
 ### ¿Qué representa la clase `Particle`?
 La clase `Particle` es un **molde** para crear partículas.  
@@ -159,6 +158,7 @@ El polimorfismo se implementa con las vtables, que permiten decidir en tiempo de
 **Análisis: ventajas y desventajas en términos de eficiencia y complejidad**
 - Ventajas: más organización, reutilización de código, flexibilidad para manejar jerarquías de clases y escribir programas más modulares.
 - Desventajas: aumenta la complejidad interna, puede haber sobrecarga de memoria por las vtables y un pequeño costo de rendimiento en las llamadas virtuales.
+
 
 
 
