@@ -19,14 +19,14 @@ La clase `Particle` es un **molde** para crear partículas.
 - Un **objeto** es una instancia real creada a partir de esa clase.
 
 ---
-### Explorando la memoria en C++
+## Explorando la memoria en C++
 - Cada **objeto** ocupa su propio espacio en memoria.  
 - Dos instancias (`p1` y `p2`) tienen direcciones diferentes, aunque sean del mismo tipo.  
 - Los **atributos** (`x` y `y`) de un mismo objeto suelen estar almacenados de forma contigua.  
 - El **sizeof(Particle)** muestra cuántos bytes ocupa la clase en memoria (la suma de sus atributos, considerando alineación).
 
 ---
-### Análisis de diferencias en memoria
+## Análisis de diferencias en memoria
 
 - **Clases simples vs complejas**:  
   - `Simple` con un solo atributo ocupa pocos bytes.  
@@ -42,32 +42,31 @@ La clase `Particle` es un **molde** para crear partículas.
   - La memoria real del arreglo (`new int[10]`) se guarda en el **heap**, no dentro del objeto.  
   - Por eso, el tamaño del objeto no cambia, pero sí la memoria total que consume el programa.
 
-  ### Reflexión
+## Reflexión
 
-- **¿Qué es un objeto desde la perspectiva de la memoria?**:  
+### **¿Qué es un objeto desde la perspectiva de la memoria?**:  
 **R//** Es un bloque de memoria que contiene sus atributos. Según cómo se cree, puede estar en el **stack** (si es automático) o en el **heap** (si se usa `new`).  
 
-- **¿Cómo influyen los atributos y métodos en el tamaño y estructura del objeto?**:  
+### **¿Cómo influyen los atributos y métodos en el tamaño y estructura del objeto?**:  
   - Los **atributos** influyen directamente en el tamaño del objeto (`sizeof`).  
   - Los **métodos** no aumentan el tamaño del objeto, porque el código se guarda en otra sección de la memoria (sección de texto/código).  
   - Si hay **punteros dinámicos**, el objeto guarda solo la dirección, mientras que la memoria real se reserva en el heap.  
 
-- **Conclusión**:  
+### **Conclusión**:  
 **R//** El diseño de clases debe balancear el uso de atributos normales, estáticos y dinámicos, ya que cada uno impacta distinto la memoria. 
 Entender dónde vive cada parte ayuda a evitar fugas de memoria y a optimizar el rendimiento.
 
 ---
-## Sesión 2:
+# Sesión 2:
 
-
-**Objetivo**: comprender cómo se organizan los objetos en memoria.
+### **Objetivo**: comprender cómo se organizan los objetos en memoria.
 
 **R//** En C++, los **datos de una clase** (atributos) se almacenan en el stack o en el heap dependiendo de cómo se cree el objeto, mientras que los **métodos** se guardan en
 la sección de código del programa y son compartidos por todos los objetos.  
 Cuando hay **métodos virtuales**, se crea una **vtable** (tabla virtual) que guarda punteros a las funciones. Cada objeto tiene un puntero a esta tabla,
 lo que permite decidir en tiempo de ejecución qué versión del método ejecutar.
 
-### Exploración de métodos virtuales
+## Exploración de métodos virtuales
 
 1. **¿Cómo afecta la presencia de métodos virtuales al tamaño del objeto?**  
 **R//** Cuando una clase incluye al menos un método virtual, cada objeto de esa clase incorpora un **puntero oculto** (generalmente llamado *vptr*) que apunta a la vtable correspondiente.
@@ -81,7 +80,7 @@ que un puntero o referencia a una clase base pueda invocar correctamente método
 **R//** Los métodos virtuales en C++ se manejan con algo llamado **vtable**, que es como una tabla que guarda las direcciones de las funciones. Cada objeto tiene un puntero a esa tabla, y cuando se llama un método virtual,
 el programa busca en la vtable cuál función debe ejecutar. De esta forma, se asegura que se llame al método correcto según el tipo real del objeto, logrando el polimorfismo.
 
-### Uso de punteros y referencias
+## Uso de punteros y referencias
 
 Cuando uso punteros a funciones dentro de una clase, básicamente el objeto tiene que guardar la dirección de esa función en memoria. Eso hace que la instancia pueda ocupar un poco más.  
 
@@ -89,7 +88,7 @@ Cuando uso punteros a funciones dentro de una clase, básicamente el objeto tien
 - Sobre el **rendimiento**, usar punteros da más flexibilidad, pero la llamada tiene un paso extra y puede ser un poquito más lenta que llamar directo.  
 - La **diferencia** está en que los punteros a funciones apuntan a funciones globales o estáticas, mientras que los punteros a métodos de clase además necesitan saber qué objeto están usando, por eso son más complejos.
 
-### Reflexión individual
+## Reflexión individual
 
 **¿Dónde residen los datos y métodos de una clase en la memoria?**  
 **R//** Los datos de un objeto se guardan en memoria (en el stack o el heap, según cómo lo cree).  
@@ -103,13 +102,14 @@ Si son virtuales, se usa una tabla (vtable) que decide qué versión del método
 **Conclusión: cómo esta comprensión afecta el diseño de sistemas.**  
 **R//** Saber dónde se guarda cada cosa y cómo se usa ayuda a pensar mejor las clases.  
 Por ejemplo, me hace más consciente de qué atributos agregar, cuándo usar herencia o métodos virtuales, y cómo eso puede afectar memoria y rendimiento.
+
 ---
 
-## Sesión 3: Implementación Interna de Encapsulamiento, Herencia y Polimorfismo
+# Sesión 3: Implementación Interna de Encapsulamiento, Herencia y Polimorfismo
 
 **Objetivo:** entender cómo se implementan las abstracciones del encapsulamiento, la herencia y el polimorfismo a nivel interno.
 
-# Encapsulamiento
+## Encapsulamiento
 
 1. **¿Qué es el encapsulamiento y cuál es su propósito en la POO?**
 Es la forma de proteger los datos de una clase, para que solo se usen a través de métodos o interfaces seguras. Sirve para evitar que cualquier parte del programa pueda cambiar valores internos sin control.
@@ -129,7 +129,7 @@ Podría causar errores graves, pérdida de datos, vulnerabilidades de seguridad 
 6. **¿Qué implicaciones tiene este experimento sobre la confianza en las barreras de encapsulamiento que proporciona C++?**
 Que el encapsulamiento es una barrera lógica impuesta por el compilador, no una barrera física en memoria. Sirve para programar de manera segura, pero no es infalible si alguien decide romper las reglas.
 
-# Herencia y Organización en Memoria
+## Herencia y Organización en Memoria
 
 1. **¿Cómo se organizan los atributos en memoria?**
 Cuando una clase hereda de otra, el objeto de la derivada primero guarda los atributos de la clase base, y luego sus propios atributos. Es como si la base fuera el “bloque inicial” del objeto, y lo derivado se añadiera después.
@@ -140,7 +140,7 @@ La memoria se va organizando en “capas”: primero la base más lejana, despu�
 3. **¿Cómo se organiza en memoria un objeto de una clase derivada en C++?. ¿Cómo se almacenan los atributos de la clase base y de la derivada?**
 Un objeto derivado en C++ se organiza en memoria colocando primero los atributos de la clase base y luego los de la clase derivada, en orden. Si hay varios niveles de herencia, se van sumando en cadena. Así, la parte de la base siempre está al inicio del objeto, lo que permite tratar al derivado como si fuera un objeto de la base.
 
-# Polimorfismo y Vtables
+## Polimorfismo y Vtables
 
 1. **¿Cómo utiliza el programa las vtables para el polimorfismo?**
 El programa usa una tabla llamada vtable, que guarda punteros a las funciones virtuales. Cada objeto polimórfico tiene un puntero oculto a su vtable, y cuando se llama a un método virtual, se busca en esa tabla cuál función ejecutar según el tipo real del objeto.
@@ -159,4 +159,5 @@ El polimorfismo se implementa con las vtables, que permiten decidir en tiempo de
 **Análisis: ventajas y desventajas en términos de eficiencia y complejidad**
 - Ventajas: más organización, reutilización de código, flexibilidad para manejar jerarquías de clases y escribir programas más modulares.
 - Desventajas: aumenta la complejidad interna, puede haber sobrecarga de memoria por las vtables y un pequeño costo de rendimiento en las llamadas virtuales.
+
 
