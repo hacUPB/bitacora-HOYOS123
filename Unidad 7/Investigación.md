@@ -89,8 +89,7 @@ A diferencia de la CPU, que trabaja en serie, la GPU tiene miles de núcleos peq
 ## Actividad 2 – Primer Shader y Experimento con `draw()`
 
 ## **Experimento inicial**
-
-Al hacer la prueba, primero comenté las líneas donde se iniciaba y terminaba el shader, dejando el método `draw()` así:
+**R//** Al hacer la prueba, primero comenté las líneas donde se iniciaba y terminaba el shader, dejando el método `draw()` así:
 
 ```
 void ofApp::draw(){
@@ -112,7 +111,7 @@ Nada se movía ni cambiaba de color. Básicamente, el programa estaba dibujando 
 ---
 
 ## **Ejecución del código original**
-Después volví a activar el shader con shader.begin() y shader.end(), y esta vez sí hubo un cambio.
+**R//** Después volví a activar el shader con shader.begin() y shader.end(), y esta vez sí hubo un cambio.
 La pantalla empezó a mostrar una variación de colores, como si estuvieran animados.
 
 Ahí entendí que el shader estaba tomando el control del color de los píxeles, y que la GPU era la encargada de hacer todos esos cálculos de manera muy rápida.
@@ -120,7 +119,7 @@ Ahí entendí que el shader estaba tomando el control del color de los píxeles,
 ---
 
 ## **¿Qué entendí del funcionamiento?**
-En este ejercicio pude ver que hay dos partes importantes:
+**R//** En este ejercicio pude ver que hay dos partes importantes:
 
 1. La CPU, que es donde corre la aplicación principal. Ella se encarga de decirle a la GPU qué hacer, por ejemplo, cuándo comenzar o terminar el shader.
 
@@ -133,8 +132,117 @@ En este ejercicio pude ver que hay dos partes importantes:
 ## **Lo que hace cada shader**
 
 **Vertex Shader:**
-Se encarga de las posiciones de los vértices (los puntos del rectángulo). En este ejemplo, no cambia nada visualmente, solo se asegura de que todo se dibuje bien.
+**R//** Se encarga de las posiciones de los vértices (los puntos del rectángulo). En este ejemplo, no cambia nada visualmente, solo se asegura de que todo se dibuje bien.
 
 **Fragment Shader:**
-Es el que decide el color final de cada punto (píxel). En el ejemplo original, los colores cambian según el tiempo o las coordenadas de la pantalla, lo que hace que todo se vea dinámico.
+**R//** Es el que decide el color final de cada punto (píxel). En el ejemplo original, los colores cambian según el tiempo o las coordenadas de la pantalla, lo que hace que todo se vea dinámico.
+
+---
+
+---
+
+# Actividad 3 – Pasando información personalizada a los shaders
+
+## 1. **¿Qué es un "uniform"?**
+**R//** Entendí que un **uniform** es una variable especial que le permite a la CPU enviarle datos a la GPU.  
+Por ejemplo, puedo pasarle valores como el tiempo, el color, la posición del mouse o cualquier otra cosa que cambie durante la ejecución del programa.
+
+Lo importante es que los uniforms tienen un solo valor compartido para todos los fragmentos o vértices que el shader está procesando.  
+Por eso se llaman así: *“uniformes”*, porque no cambian dentro de un mismo dibujo, aunque sí pueden actualizarse en cada frame.
+
+---
+
+## **¿Cómo funciona la comunicación entre CPU y GPU?**
+**R//** La **CPU** (la parte del programa escrita en C++) le envía datos a los shaders mediante comandos como `shader.setUniform1f()` o `shader.setUniform2f()`.  
+Luego, en el shader (escrito en GLSL), esos valores se reciben con una variable declarada como `uniform`.
+
+Por ejemplo:
+
+**En el código de aplicación (C++):**
+
+```
+shader.begin();
+shader.setUniform1f("time", ofGetElapsedTimef());
+ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+shader.end();
+```
+
+**En el fragment shader (GLSL):**
+
+```
+uniform float time;
+
+void main(){
+    gl_FragColor = vec4(abs(sin(time)), 0.3, 0.8, 1.0);
+}
+```
+
+En este caso, el programa le pasa a la GPU el valor del tiempo (time), y el shader lo usa para cambiar los colores con el paso de los segundos.
+
+---
+
+** Mi experimento con el fragment shader**
+**R//** Modifiqué el código para que el color de cada píxel dependiera de su posición en pantalla.
+Agregué dos uniforms: uno para el ancho de la ventana y otro para la altura. Así pude crear un degradado de color horizontal y vertical.
+
+```
+uniform float time;
+uniform vec2 resolution;
+
+void main(){
+    vec2 st = gl_FragCoord.xy / resolution;
+    gl_FragColor = vec4(st.x, st.y, abs(sin(time)), 1.0);
+}
+```
+
+El resultado fue un fondo con colores que cambiaban lentamente, mezclando tonos según la posición de cada píxel y el tiempo.
+Fue interesante ver cómo solo unas pocas líneas podían generar un efecto visual tan dinámico.
+
+---
+
+---
+
+# Actividad 4 – Adding Some Interactivity
+
+## **Lo que buscaba lograr**
+**R//** La idea principal era que el color o el efecto del shader reaccionara según la posición del mouse en la pantalla.  
+Con esto, uno puede empezar a crear efectos más vivos y dinámicos, donde el usuario tiene cierto control visual.
+
+---
+
+## **¿Cómo lo hice?**
+**R//** Primero, en el código de la aplicación (C++), agregué un uniform nuevo que enviara la posición actual del mouse al shader.  
+El código quedó así:
+
+```
+shader.begin();
+shader.setUniform2f("mouse", mouseX, mouseY);
+shader.setUniform2f("resolution", ofGetWidth(), ofGetHeight());
+shader.setUniform1f("time", ofGetElapsedTimef());
+ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+shader.end();
+```
+
+Después, en el fragment shader, recibí esa información y la usé para cambiar los colores según la distancia entre el mouse y cada píxel.
+
+```
+uniform vec2 resolution;
+uniform vec2 mouse;
+uniform float time;
+
+void main() {
+    vec2 st = gl_FragCoord.xy / resolution;
+    vec2 m = mouse / resolution;
+
+    float dist = distance(st, m);
+    vec3 color = vec3(abs(sin(time)) * dist, st.x, st.y);
+    
+    gl_FragColor = vec4(color, 1.0);
+}
+```
+
+Así logré que los colores se movieran y cambiaran dependiendo de dónde estaba el mouse, además de tener una animación que variaba con el tiempo.
+
+---
+
 
