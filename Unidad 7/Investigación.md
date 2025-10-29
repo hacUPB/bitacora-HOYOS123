@@ -174,46 +174,77 @@ Luego, en el shader (escrito en GLSL), esos valores se reciben con una variable 
 
 # Actividad 4 – Adding Some Interactivity
 
-## **Lo que buscaba lograr**
-**R//** La idea principal era que el color o el efecto del shader reaccionara según la posición del mouse en la pantalla.  
-Con esto, uno puede empezar a crear efectos más vivos y dinámicos, donde el usuario tiene cierto control visual.
+En esta parte estuve revisando el ejemplo llamado **Adding some interactivity**, donde el programa reacciona al movimiento del mouse. Lo que hace básicamente es que cuando uno mueve el cursor, el color y la forma del plano cambian en tiempo real. Es muy visual y se nota cómo el movimiento del mouse afecta directamente lo que se ve en pantalla.
+
+## **¿Qué hace el código?**
+**R//** El programa dibuja una especie de malla que ocupa toda la ventana. Cuando se mueve el mouse, los colores cambian de magenta a azul, y la forma de la malla también se deforma haciendola ilusión de una esfera. Se siente como si el mouse tuviera una influencia “magnética” sobre el dibujo.
+
+[Ver video del proyecto en YouTube](https://youtu.be/CKbUCuDisHw)
+
+## **¿Cómo funciona todo?**
+**R//** El código principal se encarga de enviar información del mouse al shader, como su posición, el color y un valor que marca el rango de influencia.  
+Esa información es la que usa la parte visual (el shader) para cambiar cómo se ven los puntos y colores en la pantalla. Es como si el programa principal y el shader estuvieran en conversación constante: uno manda los datos y el otro los usa para crear los efectos.
 
 ---
 
-## **¿Cómo lo hice?**
-**R//** Primero, en el código de la aplicación (C++), agregué un uniform nuevo que enviara la posición actual del mouse al shader.  
-El código quedó así:
+## **Mis cambios**
+**R//** Modifiqué el ofApp.cpp y el fragment shader para que los colores reaccionaran al movimiento del mouse y al paso del tiempo. Ahora, la pantalla muestra un degradado dinámico lleno de tonos que cambian suavemente, mezclando colores vivos como verdes, azules y morados. Estos cambios hacen que el fondo se vea más fluido y con un efecto visual atractivo que responde a la interacción del usuario.
 
+## **Secciones de código modificado**
+**R//** 
+-En ofApp.cpp:
 ```
-shader.begin();
-shader.setUniform2f("mouse", mouseX, mouseY);
-shader.setUniform2f("resolution", ofGetWidth(), ofGetHeight());
-shader.setUniform1f("time", ofGetElapsedTimef());
-ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
-shader.end();
-```
+void ofApp::update() {
+    elapsedTime = ofGetElapsedTimef();
+}
 
-Después, en el fragment shader, recibí esa información y la usé para cambiar los colores según la distancia entre el mouse y cada píxel.
+void ofApp::draw() {
+    shader.begin();
 
-```
-uniform vec2 resolution;
-uniform vec2 mouse;
-uniform float time;
+    shader.setUniform1f("u_time", elapsedTime);
+    shader.setUniform2f("u_mouse", mouseX, mouseY);
+    shader.setUniform2f("u_resolution", ofGetWidth(), ofGetHeight());
 
-void main() {
-    vec2 st = gl_FragCoord.xy / resolution;
-    vec2 m = mouse / resolution;
+    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
 
-    float dist = distance(st, m);
-    vec3 color = vec3(abs(sin(time)) * dist, st.x, st.y);
-    
-    gl_FragColor = vec4(color, 1.0);
+    shader.end();
 }
 ```
+---
 
-Así logré que los colores se movieran y cambiaran dependiendo de dónde estaba el mouse, además de tener una animación que variaba con el tiempo.
+- En ofApp.h:
+```
+float elapsedTime;
+```
 
 ---
 
+- En el fragment shader / shader.frag
 
+Este shader mezcla el efecto del tiempo con el color del mouse:
 
+```
+#version 150
+
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_time;
+
+out vec4 outputColor;
+
+void main() {
+    vec2 st = gl_FragCoord.xy / u_resolution.xy;
+
+    // Color base que cambia con el tiempo
+    float wave = sin(u_time + st.x * 5.0) * 0.5 + 0.5;
+
+    // Color que depende de la posición del mouse
+    vec3 color = vec3(st.x, st.y, wave);
+
+    // Mezclamos el color con la posición del mouse
+    color.r += u_mouse.x / u_resolution.x * 0.5;
+    color.g += u_mouse.y / u_resolution.y * 0.5;
+
+    outputColor = vec4(color, 1.0);
+}
+```
