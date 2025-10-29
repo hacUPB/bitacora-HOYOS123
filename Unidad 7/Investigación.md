@@ -103,18 +103,21 @@ void ofApp::draw(){
 }
 ```
 
-(Todo esto antes de ejecutar el código original).
+Donde el programa leía un color Blanco.
 
-Cuando lo ejecuté, simplemente apareció un rectángulo blanco que ocupaba toda la pantalla.
-Nada se movía ni cambiaba de color. Básicamente, el programa estaba dibujando sin pasar por la GPU, o al menos sin aplicar ningún efecto.
+(Todo esto antes de ejecutar el código original).
 
 ---
 
 ## **Ejecución del código original**
 **R//** Después volví a activar el shader con shader.begin() y shader.end(), y esta vez sí hubo un cambio.
-La pantalla empezó a mostrar una variación de colores, como si estuvieran animados.
+La pantalla empezó a mostrar un degradado de colores que ocupaba toda la pantalla. Nada se movía ni cambiaba los colores. 
+Básicamente, el programa estaba dibujando sin pasar por la GPU, o al menos sin aplicar ningún efecto.
 
 Ahí entendí que el shader estaba tomando el control del color de los píxeles, y que la GPU era la encargada de hacer todos esos cálculos de manera muy rápida.
+
+**Imagen de evidencia:**
+<img width="1358" height="729" alt="image" src="https://github.com/user-attachments/assets/6ef0b26a-a2a7-409e-bb13-356f6a446452" />
 
 ---
 
@@ -156,47 +159,14 @@ Por eso se llaman así: *“uniformes”*, porque no cambian dentro de un mismo 
 **R//** La **CPU** (la parte del programa escrita en C++) le envía datos a los shaders mediante comandos como `shader.setUniform1f()` o `shader.setUniform2f()`.  
 Luego, en el shader (escrito en GLSL), esos valores se reciben con una variable declarada como `uniform`.
 
-Por ejemplo:
-
-**En el código de aplicación (C++):**
-
-```
-shader.begin();
-shader.setUniform1f("time", ofGetElapsedTimef());
-ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
-shader.end();
-```
-
-**En el fragment shader (GLSL):**
-
-```
-uniform float time;
-
-void main(){
-    gl_FragColor = vec4(abs(sin(time)), 0.3, 0.8, 1.0);
-}
-```
-
-En este caso, el programa le pasa a la GPU el valor del tiempo (time), y el shader lo usa para cambiar los colores con el paso de los segundos.
+<img width="1360" height="730" alt="image" src="https://github.com/user-attachments/assets/beb03487-8680-4723-b390-01f9b08a65b0" />
 
 ---
 
 ** Mi experimento con el fragment shader**
-**R//** Modifiqué el código para que el color de cada píxel dependiera de su posición en pantalla.
-Agregué dos uniforms: uno para el ancho de la ventana y otro para la altura. Así pude crear un degradado de color horizontal y vertical.
+**R//** Modifiqué los colores del código entre verde y blanco.
 
-```
-uniform float time;
-uniform vec2 resolution;
-
-void main(){
-    vec2 st = gl_FragCoord.xy / resolution;
-    gl_FragColor = vec4(st.x, st.y, abs(sin(time)), 1.0);
-}
-```
-
-El resultado fue un fondo con colores que cambiaban lentamente, mezclando tonos según la posición de cada píxel y el tiempo.
-Fue interesante ver cómo solo unas pocas líneas podían generar un efecto visual tan dinámico.
+[Ver video del proyecto en YouTube](https://youtu.be/S9_S_PSYTDY)
 
 ---
 
@@ -244,5 +214,6 @@ void main() {
 Así logré que los colores se movieran y cambiaran dependiendo de dónde estaba el mouse, además de tener una animación que variaba con el tiempo.
 
 ---
+
 
 
