@@ -6,7 +6,7 @@ El proyecto consiste en una aplicación creada con openFrameworks que simula el 
 En el diseño, se utiliza una malla plana con textura que se deforma dinámicamente en el vertex shader para generar un efecto de ondas que imita el movimiento del viento sobre una tela,
 mientras que el fragment shader aplica los colores y detalles visuales a partir de una imagen.
 
-## **Imagen del mejor equipo de Colombia**
+## **Imagen del mejor equipo de Colombia** (Imagen de la textura utilizada)
 **R//** ATLÉTICO NACIONAL
 ![BANDERA ATLÉTICO NACIONAL](https://github.com/user-attachments/assets/e6355e36-579d-42a5-96f6-b4ffeb0d0277)
 
@@ -262,6 +262,7 @@ Después revisé en el draw() que el shader se activara antes de dibujar la mall
 
 ## **¿Cómo probé el fragment shader?**
 **R//** Lo primero que hice fue ejecutar la aplicación y verificar si la textura se aplicaba correctamente sobre la bandera, comprobando que no hubiera deformaciones, cortes o zonas sin imagen.
+
 
 
 
