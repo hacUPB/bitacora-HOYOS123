@@ -57,7 +57,10 @@ Después de ajustar varios detalles, logré que el proyecto fuera fluido, establ
 
 ---
 
-### **Evidencias**
+# **Evidencias**
+
+### **CÓDIGOS**
+
 - **Código fuente:**
 
 of.App.h:
@@ -355,5 +358,31 @@ void ofApp::changeState(State* newState) {
     notify(currentState->getName());
 }
 ´´´
-- **Video:** muestra la aplicación en funcionamiento (se puede agregar el enlace).  
-- **Documentación:** explicación del diseño, pruebas y funcionamiento general.
+
+---
+
+### **Validación de los resultados de aprendizaje**
+
+#### **RAE1: Construcción de la aplicación**
+La aplicación cumple con los requisitos funcionales al integrar los tres patrones de diseño de forma coherente:
+- **Observer**: sincroniza el comportamiento de todos los círculos ante los eventos globales.
+- **Factory**: genera distintos tipos de círculos con características visuales y dinámicas únicas.
+- **State**: controla los modos del sistema y la energía general de la composición.
+
+Esto permite que el proyecto sea modular, escalable y con un comportamiento interactivo fluido.
+
+#### **RAE2: Pruebas del software**
+Durante las pruebas, confirmé tanto el funcionamiento individual como la integración de los tres patrones:
+- Al cambiar el **estado** (State), verifiqué que los círculos creados por distintas fábricas respondieran correctamente al evento de cambio (Observer).
+- Probé que las notificaciones globales no generaran duplicación ni errores de referencia.
+- Revisé que el rendimiento se mantuviera estable incluso con muchos círculos activos.
+- Validé que las teclas y eventos del mouse siguieran funcionando correctamente tras múltiples transiciones entre estados.
+
+El resultado fue un comportamiento consistente, con transiciones suaves y sin conflictos entre los patrones implementados.
+
+---
+
+### **📽️ Video demostrativo**
+
+
+
