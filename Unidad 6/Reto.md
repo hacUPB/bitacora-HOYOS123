@@ -7,7 +7,7 @@ Cada estado cambia la forma en que se mueven y los colores que usan los círculo
 
 ---
 
-### **Cómo usé los patrones de diseño**
+### **¿Cómo usé los patrones de diseño?**
 
 #### - **Observer**
 Usé este patrón para que los círculos “escuchen” los cambios del estado general.  
