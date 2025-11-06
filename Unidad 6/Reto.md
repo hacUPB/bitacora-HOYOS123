@@ -382,7 +382,7 @@ El resultado fue un comportamiento consistente, con transiciones suaves y sin co
 
 ---
 
-### **📽️ Video demostrativo**
+### **Video demostrativo**
 [Video de evidencia](https://youtu.be/XiRjEtm3I8s)
 
 
