@@ -24,7 +24,21 @@ Queremos lograr que el usuario pueda **interactuar** con la simulación:
 
 ### Interactividad  
 - El usuario controla los fuegos artificiales mediante el teclado y el mouse.  
-- Esto refuerza la idea de un **juego experimental**, donde el jugador puede elegir qué tipo de explosión lanzar y explorar los distintos efectos.  
+- Esto refuerza la idea de un **juego experimental**, donde el jugador puede elegir qué tipo de explosión lanzar y explorar los distintos efectos.
+
+### Encapsulamiento
+En el proyecto también se aplicó este principio para mantener un mejor control sobre los datos internos de cada fuego artificial.  
+Las propiedades como la posición, velocidad, color y estado se declararon como **privadas o protegidas** dentro de la clase base `Firework`.  
+De esta forma, solo se pueden modificar mediante métodos públicos controlados (getters y setters), evitando cambios accidentales y asegurando que el comportamiento de cada fuego se mantenga coherente durante la simulación.
+
+---
+
+### Experimentación y rendimiento
+Durante la experimentación se realizaron diferentes pruebas para observar cómo afectaban las decisiones de diseño al rendimiento general.  
+Por ejemplo, se comparó el uso de **objetos estáticos** frente a la creación dinámica de partículas, notando que mantener una cantidad limitada de partículas activas en memoria mejora la estabilidad del programa. Cosa que se hace notar casi al final del video demostrativo, que la última carga que fue iniciada tenía demasiadas partículas y esto genera que el programa colapse o simplemente el computador deje de funcionar correctamente.
+
+También se revisó el impacto del uso de **métodos virtuales** dentro del polimorfismo, identificando que, aunque añaden una pequeña sobrecarga, facilitan enormemente la extensibilidad del código.  
+Por esa razón, se priorizó la claridad y la reutilización del código sobre la micro-optimización, buscando un equilibrio entre rendimiento y mantenibilidad.
 
 ---
 
