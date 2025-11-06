@@ -29,8 +29,7 @@ Queremos lograr que el usuario pueda **interactuar** con la simulación:
 ---
 
 ## Resultados del Proyecto  
-- Representar un ejemplo práctico de **Programación Orientada a Objetos (POO)** aplicando herencia y polimorfismo.  
-- Comprender cómo organizar un proyecto en **clases base y derivadas** para manejar diferentes comportamientos.  
-- Crear una experiencia visual llamativa y dinámica relacionada con los **fuegos artificiales reales**.
+En el proyecto se puede observar lo 2 modos de fuegos artificiales que hay. En cada modo hay 2 estilos diferentes, que forman 4 "Cargas" diferentes... que hacen la acción cuando pulso click derecho o click izquierdo... El botón "C" de CHANGE, hace que estas cargas cambien y aparezcan cargas nuevas, como el siguiente video que voy a mostrar.
 
-Por ahora lo que estoy haciendo está en desarrollo y van a haber varios cambios pero va por muy buen camino.
+# Video demostrativo:
+[Video Reto Unidad 5](https://youtu.be/rHvDJOZXW-U)
