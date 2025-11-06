@@ -63,8 +63,9 @@ Después de ajustar varios detalles, logré que el proyecto fuera fluido, establ
 
 - **Código fuente:**
 
-of.App.h:
-´´´
+**of.App.h:**
+
+```
 #pragma once
 #include "ofMain.h"
 
@@ -271,10 +272,11 @@ public:
         notify("SPEED_CHANGED");
     }
 };
-´´´
+```
 
-ofApp.cpp:
-´´´
+**ofApp.cpp:**
+
+```
 #include "ofApp.h"
 
 //--------------------------------------------------------------
@@ -357,7 +359,7 @@ void ofApp::changeState(State* newState) {
     currentState = newState;
     notify(currentState->getName());
 }
-´´´
+```
 
 ---
 
