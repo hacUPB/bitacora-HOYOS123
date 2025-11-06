@@ -29,7 +29,7 @@ Gracias a esto, puedo controlar cómo se comportan y cómo se ven dependiendo de
 
 ---
 
-#### **State**
+#### - **State**
 Este patrón lo usé para controlar los tres modos principales del programa.  
 Cada modo cambia la forma en que los círculos se mueven:
 - En **Calm**, se mueven suave y lento.  
