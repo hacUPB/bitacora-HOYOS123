@@ -9,7 +9,7 @@ Cada estado cambia la forma en que se mueven y los colores que usan los círculo
 
 ### **Cómo usé los patrones de diseño**
 
-#### **Observer**
+#### - **Observer**
 Usé este patrón para que los círculos “escuchen” los cambios del estado general.  
 Cuando el programa cambia de modo (por ejemplo, de Calm a Active), todos los círculos se enteran al mismo tiempo y reaccionan automáticamente.  
 Sin embargo, solo en el modo **Calm** los círculos pueden cambiar de color presionando la tecla **M**.  
@@ -17,7 +17,7 @@ Esto lo hice para que cada grupo de círculos tuviera su propia personalidad y n
 
 ---
 
-#### **Factory**
+#### - **Factory**
 Usé el patrón Factory para crear distintos tipos de círculos fácilmente.  
 En total, tengo **tres fábricas** diferentes:
 
